@@ -19,10 +19,6 @@ All selected users combined commited 271 commits and spend ca. 95:20:14 (DD:HH:M
 
 In order for the CLI to calculate the time spend on the repository, it will simply calculate the time between commits.
 
-Additionally, there is a duration threshold (see `--max-duration`): If this threshold is reached, the time between the commits will not be counted (e.g. to not count the times when the developer has slept or took a longer break).
-
-These blocks of commits are called "sessions". You can specify a number of minutes that should be added for each session, e.g. to accommodate for the time spend before the first commit of a session was made, using `--session-begin`.
-
 ## Installation
 In order for git-dev-time to work, you'll have to have [NodeJS](https://nodejs.org/) with npm and the [Git CLI](https://git-scm.com/downloads) installed on your computer first.
 
@@ -81,7 +77,10 @@ git-dev-time vantezzen notch # Get stats for user "vantezzen" and user "notch"
 git-dev-time vantezzen -d /usr/home/me/repositories/example # Get stats for user "vantezzen" for the Git repository that's inside the directory
 ```
 
+#### CLI behaviour
 Users that have never commited will be ignored and nothing will be output. When trying to get stats for a directory that doesn't contain a Git repository, an error will be thrown.
+
+The CLI will use the username contained _in the commit_ itself - this isn't always the GitHub/GitLab/etc. username! Please check the Git log to see the Git username a developer used.
 
 You don't necessarily have to run the CLI in the root directory in order for it to detect your Git repository. git-dev-time uses the Git command under the hood which allows you to execute it in any subdirectory of your Git repository.
 
@@ -89,6 +88,11 @@ If you get stats for multiple users, the CLI will also print a combined summary.
 
 #### --all
 By default, git-dev-time will only use commits on the current branch. If you want to use commits from all branches, supply the `--all` argument.
+
+#### Sessions
+There is a duration threshold between commits (`--max-duration`): If this threshold is reached, the time between the commits will not be counted (e.g. to not count the times when the developer has slept or took a longer break).
+
+These blocks of commits are called "sessions". You can specify a number of minutes that should be added for each session, e.g. to accommodate for the time spend before the first commit of a session was made, using `--session-begin`.
 
 ## License
 This project is licensed under the MIT License.
