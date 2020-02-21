@@ -67,6 +67,14 @@ let allUsersSessions = 0;
 
 // Let us work in an async environment to make working with multiple users easier
 (async () => {
+  // Check if the repostory actually exists
+  try {
+    await repo.status();
+  } catch(e) {
+    console.log('The directory you supplied might not contain a Git repository:', e.message);
+    process.exit(1);
+  }
+
   for (const username of usernames) {
     // git log will give us information about all commits the user has made
     let log;
