@@ -1,0 +1,33 @@
+{
+  "name": "git-dev-time",
+  "version": "1.0.0",
+  "description": "Calculate an estimate of time a git user spend on a repository",
+  "main": "index.js",
+  "bin": {
+    "git-dev-time": "index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "calculate": "node index.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vantezzen/git-dev-time.git"
+  },
+  "keywords": [
+    "git",
+    "time",
+    "stats"
+  ],
+  "author": "vantezzen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vantezzen/git-dev-time/issues"
+  },
+  "homepage": "https://github.com/vantezzen/git-dev-time#readme",
+  "dependencies": {
+    "commander": "^4.1.1",
+    "simple-git": "^1.131.0"
+  }
+}
