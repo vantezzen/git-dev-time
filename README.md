@@ -70,6 +70,7 @@ Options:
   -d, --directory <directory>     Directory of the git repository (default: "./")
   -n, --no-days                   Only calculate the total hours and don't calculate days
   -s, --session-begin <duration>  Number of minutes to add to each session (default: 0)
+  -a, --all                       Check on all branches
   -h, --help                      output usage information
 ```
 
@@ -85,6 +86,9 @@ Users that have never commited will be ignored and nothing will be output. When 
 You don't necessarily have to run the CLI in the root directory in order for it to detect your Git repository. git-dev-time uses the Git command under the hood which allows you to execute it in any subdirectory of your Git repository.
 
 If you get stats for multiple users, the CLI will also print a combined summary.
+
+#### --all
+By default, git-dev-time will only use commits on the current branch. If you want to use commits from all branches, supply the `--all` argument.
 
 ## License
 This project is licensed under the MIT License.

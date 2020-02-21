@@ -24,6 +24,7 @@ program
   .option('-d, --directory <directory>', 'Directory of the git repository', './')
   .option('-n, --no-days', 'Only calculate the total hours and don\'t calculate days')
   .option('-s, --session-begin <duration>', 'Number of minutes to add to each session', 0)
+  .option('-a, --all', 'Check on all branches', 0)
   .action((u) => {
     usernames = u;
   });
@@ -70,7 +71,10 @@ let allUsersSessions = 0;
     // git log will give us information about all commits the user has made
     let log;
     try {
-      log = await repo.log({"--author": username});
+      log = await repo.log({
+        "--author": username,
+        ...program.all ? {'--all': true} : {},
+      });
     } catch (e) {
       console.log(`Couldn't get log for ${username}:`, e);
       continue;
