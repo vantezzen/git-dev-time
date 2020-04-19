@@ -6,15 +6,21 @@ git-dev-time gives you various stats about users from a Git repository:
 - Timeframe in which the commits have been made
 - Estimated time spend on the project (based on when commits have been made)
 - Number of programming sessions the user made (based on when commits have been made)
+- Estimate, how much that work would have cost when paying by hours
 
-This CLI was originally created to retroactively give an estimate of how many hours I needed to complete a project.
+This CLI was originally created to retroactively give an estimate of how many hours I needed to complete a project. Please don't actually use this to bill your client - this method is very inacturate in telling how much time you've actually spent and should only give a general area.
 
 Example:
 ```bash
 $ git-dev-time vantezzen Gert invalidUser
-User "vantezzen" commited 163 times between 13/11/2019 and 18/02/2020 and spend ca. 53:11:24 (DD:HH:MM:SS) in 47 sessions on this repository.
-User "Gert" commited 108 times between 01/12/2019 and 18/02/2020 and spend ca. 42:8:50 (DD:HH:MM:SS) in 31 sessions on this repository.
-All selected users combined commited 271 commits and spend ca. 95:20:14 (DD:HH:MM:SS) in 78 sessions on this repository.
+User "vantezzen" commited 184 times between 13/11/2019 and 24/02/2020 and spend ca. 2:11:19:31 (DD:HH:MM:SS) in 52 sessions on this repository.
+With an hourly wage of $70 this would cost $4200.
+
+User "Gert" commited 124 times between 01/12/2019 and 24/02/2020 and spend ca. 1:21:21:46 (DD:HH:MM:SS) in 35 sessions on this repository.
+With an hourly wage of $70 this would cost $3220.
+
+All selected users combined commited 308 commits and spend ca. 4:8:41:17 (DD:HH:MM:SS) in 87 sessions on this repository.
+With an hourly wage of $70 this would cost $7350.
 ```
 
 In order for the CLI to calculate the time spend on the repository, it will simply calculate the time between commits.
@@ -67,6 +73,7 @@ Options:
   -n, --no-days                   Only calculate the total hours and don't calculate days
   -s, --session-begin <duration>  Number of minutes to add to each session (default: 0)
   -a, --all                       Check on all branches
+  -w, --wage <wage>               Hourly wage (to calculate cost of the work) (default: 70)
   -h, --help                      output usage information
 ```
 

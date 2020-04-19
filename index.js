@@ -2,7 +2,7 @@
 /**
  * Calculate an estimate of time a git user spend on a repository
  * 
- * @version 1.0.0
+ * @version 1.2.1
  * @author vantezzen
  * @license MIT
  * @copyright 2020
@@ -25,6 +25,7 @@ program
   .option('-n, --no-days', 'Only calculate the total hours and don\'t calculate days')
   .option('-s, --session-begin <duration>', 'Number of minutes to add to each session', 0)
   .option('-a, --all', 'Check on all branches', 0)
+  .option('-w, --wage <wage>', 'Hourly wage (to calculate cost of the work)', 70)
   .action((u) => {
     usernames = u;
   });
@@ -127,14 +128,21 @@ let allUsersSessions = 0;
     const time = formatTime(totalTime);
     const firstCommit = new Date(commits[commits.length - 1].date).toLocaleDateString();
     const lastCommit = new Date(commits[0].date).toLocaleDateString();
+    const hours = Math.ceil(totalTime / 3600);
+    const wage = hours * program.wage;
   
-    console.log(`User "${username}" commited ${commits.length} times between ${firstCommit} and ${lastCommit} and spend ca. ${time} (DD:HH:MM:SS) in ${totalSessions} sessions on this repository.`);
+    console.log(`User "${username}" commited ${commits.length} times between ${firstCommit} and ${lastCommit} and spend ca. ${time} (DD:HH:MM:SS) in ${totalSessions} sessions on this repository.
+With an hourly wage of \$${program.wage} this would cost \$${wage}.
+`);
   }
 
   // Output a summary of all users if we have multiple usernames
   if (usernames.length > 1) {
     const time = formatTime(allUsersTime);
-    console.log(`All selected users combined commited ${allUsersCommits} commits and spend ca. ${time} (DD:HH:MM:SS) in ${allUsersSessions} sessions on this repository.`);
+    const hours = Math.ceil(allUsersTime / 3600);
+    const wage = hours * program.wage;
+    console.log(`All selected users combined commited ${allUsersCommits} commits and spend ca. ${time} (DD:HH:MM:SS) in ${allUsersSessions} sessions on this repository.
+With an hourly wage of \$${program.wage} this would cost \$${wage}.`);
   }
 })();
 

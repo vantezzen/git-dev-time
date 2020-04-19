@@ -1,6 +1,6 @@
 {
   "name": "git-dev-time",
-  "version": "1.1.0",
+  "version": "1.2.1",
   "description": "Calculate an estimate of time a git user spend on a repository",
   "main": "index.js",
   "bin": {
